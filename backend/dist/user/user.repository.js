@@ -32,7 +32,18 @@ let UserRepository = class UserRepository {
         return user === null;
     }
     async getAllUsers() {
-        return this.prisma.user.findMany();
+        const users = this.prisma.user.findMany({
+            select: {
+                id: true,
+                userName: true,
+                email: true,
+                birthday: true,
+                phoneNumber: true,
+                instagramId: true,
+                createdAt: true,
+            },
+        });
+        return users;
     }
     async createUser(payload) {
         return this.prisma.user.create({
@@ -50,6 +61,7 @@ let UserRepository = class UserRepository {
                 birthday: true,
                 phoneNumber: true,
                 instagramId: true,
+                createdAt: true,
             },
         });
     }

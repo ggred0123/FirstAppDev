@@ -40,6 +40,12 @@ export class UserDto {
   })
   instagramId!: string | null;
 
+  @ApiProperty({
+    description: "유저 생성일",
+    type: Date,
+  })
+  createdAt!: Date;
+
   static from(user: UserData): UserDto {
     return {
       id: user.id,
@@ -48,6 +54,7 @@ export class UserDto {
       birthday: user.birthday,
       phoneNumber: user.phoneNumber,
       instagramId: user.instagramId,
+      createdAt: user.createdAt,
     };
   }
 

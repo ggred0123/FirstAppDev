@@ -2,7 +2,6 @@ import { PrismaService } from "../common/services/prisma.service";
 import { Injectable } from "@nestjs/common";
 import { User } from "@prisma/client";
 import { UserData } from "./type/user-data.type";
-import { UpdateUserData } from "./type/update-user-data.type";
 import { CreateUserPayload } from "./payload/create-user.payload";
 import { CreateUserData } from "./type/create-user-data.dto";
 @Injectable()
@@ -27,7 +26,18 @@ export class UserRepository {
     return user === null;
   }
   async getAllUsers(): Promise<UserData[]> {
-    return this.prisma.user.findMany();
+    const users = this.prisma.user.findMany({
+      select: {
+        id: true,
+        userName: true,
+        email: true,
+        birthday: true,
+        phoneNumber: true,
+        instagramId: true,
+        createdAt: true,
+      },
+    });
+    return users;
   }
   async createUser(payload: CreateUserPayload): Promise<CreateUserData> {
     return this.prisma.user.create({
@@ -45,6 +55,7 @@ export class UserRepository {
         birthday: true,
         phoneNumber: true,
         instagramId: true,
+        createdAt: true,
       },
     });
   }

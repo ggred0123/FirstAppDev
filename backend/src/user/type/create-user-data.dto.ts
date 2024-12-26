@@ -5,4 +5,5 @@ export type CreateUserData = {
   birthday: Date;
   phoneNumber: string;
   instagramId: string | null;
+  createdAt: Date;
 };
