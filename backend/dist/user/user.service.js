@@ -12,16 +12,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const user_repository_1 = require("./user.repository");
+const user_dto_1 = require("./dto/user.dto");
 let UserService = class UserService {
     constructor(userRepository) {
         this.userRepository = userRepository;
     }
-    async deleteUser(userId) {
-        const user = await this.userRepository.getUserById(userId);
-        if (!user) {
-            throw new common_1.NotFoundException('User not found');
+    async getAllUsers() {
+        const users = await this.userRepository.getAllUsers();
+        return user_dto_1.UserListDto.from(users);
+    }
+    async createUser(payload) {
+        if (payload.email == undefined) {
+            throw new common_1.BadRequestException("이메일은 필수입니다.");
         }
-        return this.userRepository.deleteUser(userId);
+        return this.userRepository.createUser(payload);
     }
 };
 exports.UserService = UserService;

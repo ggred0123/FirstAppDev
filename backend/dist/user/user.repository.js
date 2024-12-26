@@ -20,17 +20,36 @@ let UserRepository = class UserRepository {
         return this.prisma.user.findFirst({
             where: {
                 id: userId,
-                deletedAt: null,
             },
         });
     }
-    async deleteUser(userId) {
-        await this.prisma.user.update({
+    async isEmailUnique(email) {
+        const user = await this.prisma.user.findUnique({
             where: {
-                id: userId,
+                email: email,
             },
+        });
+        return user === null;
+    }
+    async getAllUsers() {
+        return this.prisma.user.findMany();
+    }
+    async createUser(payload) {
+        return this.prisma.user.create({
             data: {
-                deletedAt: new Date(),
+                userName: payload.userName,
+                email: payload.email,
+                birthday: payload.birthday,
+                phoneNumber: payload.phoneNumber,
+                instagramId: payload.instagramId,
+            },
+            select: {
+                id: true,
+                userName: true,
+                email: true,
+                birthday: true,
+                phoneNumber: true,
+                instagramId: true,
             },
         });
     }

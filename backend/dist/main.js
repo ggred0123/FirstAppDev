@@ -16,13 +16,13 @@ async function bootstrap() {
     app.useGlobalFilters(new exception_filter_1.HttpExceptionFilter());
     app.enableCors();
     const config = new swagger_1.DocumentBuilder()
-        .setTitle('Eventory Server')
-        .setDescription('Eventory API description')
-        .setVersion('1.0')
-        .addTag('Eventory')
+        .setTitle("Week1 Server")
+        .setDescription("Week1 API description")
+        .setVersion("1.0")
+        .addTag("Week1")
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
-    swagger_1.SwaggerModule.setup('docs', app, document);
+    swagger_1.SwaggerModule.setup("docs", app, document);
     await app.listen(3000);
 }
 bootstrap();

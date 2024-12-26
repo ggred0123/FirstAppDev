@@ -16,27 +16,39 @@ exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const swagger_1 = require("@nestjs/swagger");
+const user_dto_1 = require("./dto/user.dto");
+const create_user_payload_1 = require("./payload/create-user.payload");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
-    async deleteUser(userId) {
-        return this.userService.deleteUser(userId);
+    async getAllUsers() {
+        return this.userService.getAllUsers();
+    }
+    async createUser(payload) {
+        return this.userService.createUser(payload);
     }
 };
 exports.UserController = UserController;
 __decorate([
-    (0, common_1.Delete)(':userId'),
-    (0, common_1.HttpCode)(204),
-    (0, swagger_1.ApiOperation)({ summary: '유저 탈퇴' }),
-    (0, swagger_1.ApiNoContentResponse)(),
-    __param(0, (0, common_1.Param)('userId')),
+    (0, common_1.Get)(),
+    (0, swagger_1.ApiOperation)({ summary: "모든 유저 정보 조회" }),
+    (0, swagger_1.ApiOkResponse)({ type: user_dto_1.UserListDto }),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "deleteUser", null);
+], UserController.prototype, "getAllUsers", null);
+__decorate([
+    (0, common_1.Post)(),
+    (0, swagger_1.ApiOperation)({ summary: "유저 생성" }),
+    (0, swagger_1.ApiCreatedResponse)({ type: user_dto_1.UserDto }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_user_payload_1.CreateUserPayload]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "createUser", null);
 exports.UserController = UserController = __decorate([
-    (0, common_1.Controller)('users'),
+    (0, common_1.Controller)("users"),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);
 //# sourceMappingURL=user.controller.js.map
