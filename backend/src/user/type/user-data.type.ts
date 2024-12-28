@@ -4,6 +4,6 @@ export type UserData = {
   email: string | null;
   birthday: Date;
   phoneNumber: string;
-  instagramId: string | null;
+  instagramId: string;
   createdAt: Date;
 };

@@ -1,1 +1,1 @@
-export declare const configModule: import("@nestjs/common").DynamicModule;
+export declare const configModule: Promise<import("@nestjs/common").DynamicModule>;

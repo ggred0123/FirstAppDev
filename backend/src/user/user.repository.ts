@@ -4,6 +4,8 @@ import { User } from "@prisma/client";
 import { UserData } from "./type/user-data.type";
 import { CreateUserPayload } from "./payload/create-user.payload";
 import { CreateUserData } from "./type/create-user-data.dto";
+import { PatchUpdateUserPayload } from "./payload/patch-update-user.payload";
+import { UpdateUserData } from "./type/update-user-data.type";
 @Injectable()
 export class UserRepository {
   constructor(private readonly prisma: PrismaService) {}
@@ -47,6 +49,30 @@ export class UserRepository {
         birthday: payload.birthday,
         phoneNumber: payload.phoneNumber,
         instagramId: payload.instagramId,
+      },
+      select: {
+        id: true,
+        userName: true,
+        email: true,
+        birthday: true,
+        phoneNumber: true,
+        instagramId: true,
+        createdAt: true,
+      },
+    });
+  }
+
+  async updateUser(id: number, data: UpdateUserData): Promise<UserData> {
+    return this.prisma.user.update({
+      where: {
+        id: id,
+      },
+      data: {
+        userName: data.userName,
+        email: data.email,
+        birthday: data.birthday,
+        phoneNumber: data.phoneNumber,
+        instagramId: data.instagramId,
       },
       select: {
         id: true,

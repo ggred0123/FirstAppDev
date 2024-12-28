@@ -17,10 +17,39 @@ export class UserService {
   }
 
   async createUser(payload: CreateUserPayload): Promise<UserDto> {
-    if (payload.email == undefined) {
-      throw new BadRequestException("이메일은 필수입니다.");
+    if (payload.email) {
+      const isEmailUnique = await this.userRepository.isEmailUnique(
+        payload.email
+      );
+      if (!isEmailUnique) {
+        throw new BadRequestException("Email is already in use");
+      }
     }
 
     return this.userRepository.createUser(payload);
+  }
+  async updateUser(
+    id: number,
+    payload: PatchUpdateUserPayload
+  ): Promise<UserDto> {
+    if (
+      payload.userName === null ||
+      payload.email === null ||
+      payload.birthday === null ||
+      payload.phoneNumber === null ||
+      payload.instagramId === null
+    ) {
+      throw new BadRequestException("Invalid payload");
+    }
+
+    const data = {
+      userName: payload.userName,
+      email: payload.email,
+      birthday: payload.birthday,
+      phoneNumber: payload.phoneNumber,
+      instagramId: payload.instagramId,
+    };
+
+    return this.userRepository.updateUser(id, data);
   }
 }

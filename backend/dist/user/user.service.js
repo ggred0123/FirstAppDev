@@ -22,10 +22,30 @@ let UserService = class UserService {
         return user_dto_1.UserListDto.from(users);
     }
     async createUser(payload) {
-        if (payload.email == undefined) {
-            throw new common_1.BadRequestException("이메일은 필수입니다.");
+        if (payload.email) {
+            const isEmailUnique = await this.userRepository.isEmailUnique(payload.email);
+            if (!isEmailUnique) {
+                throw new common_1.BadRequestException("Email is already in use");
+            }
         }
         return this.userRepository.createUser(payload);
+    }
+    async updateUser(id, payload) {
+        if (payload.userName === null ||
+            payload.email === null ||
+            payload.birthday === null ||
+            payload.phoneNumber === null ||
+            payload.instagramId === null) {
+            throw new common_1.BadRequestException("Invalid payload");
+        }
+        const data = {
+            userName: payload.userName,
+            email: payload.email,
+            birthday: payload.birthday,
+            phoneNumber: payload.phoneNumber,
+            instagramId: payload.instagramId,
+        };
+        return this.userRepository.updateUser(id, data);
     }
 };
 exports.UserService = UserService;

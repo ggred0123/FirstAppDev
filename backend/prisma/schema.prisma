@@ -18,15 +18,31 @@ model User {
   userName     String
   email        String? @unique
   phoneNumber  String  @unique
-  instagramId  String? @map("instagram_id")
+  instagramId  String  @unique @map("instagram_id")
   birthday     DateTime
   createdAt    DateTime @default(now()) @map("created_at")  
+
+  userImage   UserImage[]
   @@map("user")
 }
-//
 
-model Images {
-  id        Int     @id @map("image_id")
+
+model Image {
+  id        Int     @id @map("image_id")  @default(autoincrement())
   url       String
-  @@map("images")
+  createdAt    DateTime @map("created_at")  
+  userImage   UserImage[]
+  @@map("image")
+}
+
+model UserImage {
+  id        Int     @id @map("user_image_id") @default(autoincrement())
+  instagramId    String     @map("user_id")
+  imageId   Int     @map("image_id")
+  createdAt DateTime @default(now()) @map("created_at") 
+
+  user        User    @relation(fields: [instagramId], references: [instagramId])  
+  image       Image  @relation(fields: [imageId], references: [id]) 
+
+  @@map("user_image")
 }

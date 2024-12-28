@@ -14,6 +14,7 @@ const config_module_1 = require("./modules/config.module");
 const logger_middleware_1 = require("../common/middlewares/logger.middleware");
 const common_module_1 = require("../common/common.module");
 const user_module_1 = require("../user/user.module");
+const image_module_1 = require("../image/image.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes("*");
@@ -22,7 +23,7 @@ let AppModule = class AppModule {
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_module_1.configModule, common_module_1.CommonModule, user_module_1.UserModule],
+        imports: [config_module_1.configModule, common_module_1.CommonModule, user_module_1.UserModule, image_module_1.ImageModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

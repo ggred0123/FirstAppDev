@@ -11,9 +11,8 @@ import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 
 export class CreateUserPayload {
-  @IsOptional()
   @IsString()
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: "유저 이름",
     type: String,
   })
@@ -28,29 +27,25 @@ export class CreateUserPayload {
   })
   email?: string | null;
 
-  @IsOptional()
   @IsDate()
   @Type(() => Date)
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: "유저 생일",
     type: Date,
-    nullable: true,
   })
   birthday!: Date;
 
-  @IsOptional()
   @IsString()
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: "유저 전화번호",
     type: String,
   })
   phoneNumber!: string;
 
-  @IsOptional()
   @IsString()
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: "유저 인스타그램 ID",
     type: String,
   })
-  instagramId?: string | null;
+  instagramId!: string;
 }

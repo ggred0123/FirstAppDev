@@ -18,6 +18,7 @@ const user_service_1 = require("./user.service");
 const swagger_1 = require("@nestjs/swagger");
 const user_dto_1 = require("./dto/user.dto");
 const create_user_payload_1 = require("./payload/create-user.payload");
+const patch_update_user_payload_1 = require("./payload/patch-update-user.payload");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -27,6 +28,9 @@ let UserController = class UserController {
     }
     async createUser(payload) {
         return this.userService.createUser(payload);
+    }
+    async updateUser(id, payload) {
+        return this.userService.updateUser(id, payload);
     }
 };
 exports.UserController = UserController;
@@ -47,6 +51,16 @@ __decorate([
     __metadata("design:paramtypes", [create_user_payload_1.CreateUserPayload]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "createUser", null);
+__decorate([
+    (0, common_1.Patch)(":id"),
+    (0, swagger_1.ApiOperation)({ summary: "유저 정보 수정" }),
+    (0, swagger_1.ApiOkResponse)({ type: user_dto_1.UserDto }),
+    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, patch_update_user_payload_1.PatchUpdateUserPayload]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updateUser", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)("users"),
     __metadata("design:paramtypes", [user_service_1.UserService])
