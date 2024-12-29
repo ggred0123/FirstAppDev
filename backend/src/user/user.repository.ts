@@ -85,4 +85,20 @@ export class UserRepository {
       },
     });
   }
+  async getUserByUserName(userName: string): Promise<UserData[]> {
+    return this.prisma.user.findMany({
+      where: {
+        userName: userName,
+      },
+      select: {
+        id: true,
+        userName: true,
+        email: true,
+        birthday: true,
+        phoneNumber: true,
+        instagramId: true,
+        createdAt: true,
+      },
+    });
+  }
 }

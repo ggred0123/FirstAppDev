@@ -88,6 +88,22 @@ let UserRepository = class UserRepository {
             },
         });
     }
+    async getUserByUserName(userName) {
+        return this.prisma.user.findMany({
+            where: {
+                userName: userName,
+            },
+            select: {
+                id: true,
+                userName: true,
+                email: true,
+                birthday: true,
+                phoneNumber: true,
+                instagramId: true,
+                createdAt: true,
+            },
+        });
+    }
 };
 exports.UserRepository = UserRepository;
 exports.UserRepository = UserRepository = __decorate([

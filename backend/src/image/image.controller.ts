@@ -20,13 +20,8 @@ export class ImageController {
   @Post("upload")
   @ApiOperation({ summary: "이미지 생성" })
   @ApiCreatedResponse({ type: ImageDto })
-  @ApiConsumes("multipart/form-data")
-  @UseInterceptors(FileInterceptor("file"))
-  async createImage(
-    @UploadedFile() file: Express.Multer.File,
-    @Body() payload: CreateImagePayload
-  ): Promise<ImageDto> {
-    return this.imageService.createImage(file, payload);
+  async createImage(@Body() payload: CreateImagePayload): Promise<ImageDto> {
+    return this.imageService.createImage(payload);
   }
 
   @Get()

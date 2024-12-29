@@ -8,4 +8,5 @@ export declare class UserController {
     getAllUsers(): Promise<UserListDto>;
     createUser(payload: CreateUserPayload): Promise<UserDto>;
     updateUser(id: number, payload: PatchUpdateUserPayload): Promise<UserDto>;
+    getUserByUserName(userName: string): Promise<UserListDto>;
 }

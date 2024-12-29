@@ -47,6 +47,10 @@ let UserService = class UserService {
         };
         return this.userRepository.updateUser(id, data);
     }
+    async getUserByUserName(userName) {
+        const users = await this.userRepository.getUserByUserName(userName);
+        return user_dto_1.UserListDto.from(users);
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([

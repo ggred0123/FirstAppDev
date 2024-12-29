@@ -12,4 +12,5 @@ export declare class UserRepository {
     getAllUsers(): Promise<UserData[]>;
     createUser(payload: CreateUserPayload): Promise<CreateUserData>;
     updateUser(id: number, data: UpdateUserData): Promise<UserData>;
+    getUserByUserName(userName: string): Promise<UserData[]>;
 }

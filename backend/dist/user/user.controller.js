@@ -32,6 +32,9 @@ let UserController = class UserController {
     async updateUser(id, payload) {
         return this.userService.updateUser(id, payload);
     }
+    async getUserByUserName(userName) {
+        return this.userService.getUserByUserName(userName);
+    }
 };
 exports.UserController = UserController;
 __decorate([
@@ -61,6 +64,15 @@ __decorate([
     __metadata("design:paramtypes", [Number, patch_update_user_payload_1.PatchUpdateUserPayload]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateUser", null);
+__decorate([
+    (0, common_1.Get)(":userName"),
+    (0, swagger_1.ApiOperation)({ summary: "유저 이름으로 조회" }),
+    (0, swagger_1.ApiOkResponse)({ type: user_dto_1.UserListDto }),
+    __param(0, (0, common_1.Param)("userName")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserByUserName", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)("users"),
     __metadata("design:paramtypes", [user_service_1.UserService])

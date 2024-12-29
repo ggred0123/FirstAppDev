@@ -49,4 +49,13 @@ export class UserController {
   ): Promise<UserDto> {
     return this.userService.updateUser(id, payload);
   }
+
+  @Get(":userName")
+  @ApiOperation({ summary: "유저 이름으로 조회" })
+  @ApiOkResponse({ type: UserListDto })
+  async getUserByUserName(
+    @Param("userName") userName: string
+  ): Promise<UserListDto> {
+    return this.userService.getUserByUserName(userName);
+  }
 }

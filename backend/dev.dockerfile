@@ -1,7 +1,6 @@
 FROM node:20-alpine as builder
 ENV TZ=Asia/Seoul
 RUN apk add --no-cache openssl  # openssl1.1 -> openssl
-
 WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./

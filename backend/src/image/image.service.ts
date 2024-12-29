@@ -4,24 +4,16 @@ import { ImageDto } from "./dto/image.dto";
 import { ImageData } from "./type/image-data.type";
 import { ImageRepository } from "./image.repository";
 import { url } from "inspector";
-import { S3Service } from "src/common/aws/aws-s3.service";
 
 @Injectable()
 export class ImageService {
-  constructor(
-    private readonly imageRepository: ImageRepository,
-    private readonly s3Service: S3Service
-  ) {}
+  constructor(private readonly imageRepository: ImageRepository) {}
 
-  async createImage(
-    file: Express.Multer.File,
-    payload: CreateImagePayload
-  ): Promise<ImageDto> {
-    const s3Key = `images/${Date.now()}-${file.originalname}`;
-    const url = await this.s3Service.uploadFile(file, s3Key);
+  async createImage(payload: CreateImagePayload): Promise<ImageDto> {
+    const createdAt = new Date(payload.createdAt);
 
     const data = {
-      url,
+      url: payload.url,
       instagramIds: payload.instagramIds,
       createdAt: payload.createdAt,
     };

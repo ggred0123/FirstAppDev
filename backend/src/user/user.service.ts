@@ -52,4 +52,10 @@ export class UserService {
 
     return this.userRepository.updateUser(id, data);
   }
+
+  async getUserByUserName(userName: string): Promise<UserListDto> {
+    const users = await this.userRepository.getUserByUserName(userName);
+
+    return UserListDto.from(users);
+  }
 }
