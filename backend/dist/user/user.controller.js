@@ -35,6 +35,9 @@ let UserController = class UserController {
     async getUserByUserName(userName) {
         return this.userService.getUserByUserName(userName);
     }
+    async deleteUser(id) {
+        return this.userService.deleteUser(id);
+    }
 };
 exports.UserController = UserController;
 __decorate([
@@ -73,6 +76,15 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUserByUserName", null);
+__decorate([
+    (0, common_1.Delete)(":id"),
+    (0, swagger_1.ApiOperation)({ summary: "유저 삭제" }),
+    (0, swagger_1.ApiNoContentResponse)(),
+    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "deleteUser", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)("users"),
     __metadata("design:paramtypes", [user_service_1.UserService])

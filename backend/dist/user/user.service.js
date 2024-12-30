@@ -51,6 +51,9 @@ let UserService = class UserService {
         const users = await this.userRepository.getUserByUserName(userName);
         return user_dto_1.UserListDto.from(users);
     }
+    async deleteUser(id) {
+        return this.userRepository.deleteUser(id);
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([

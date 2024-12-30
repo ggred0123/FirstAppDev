@@ -36,10 +36,24 @@ export class ImageRepository {
 
   async getImages(): Promise<ImageData[]> {
     return this.prisma.image.findMany({
+      where: {
+        userImage: {
+          some: {
+            user: {
+              deletedAt: null,
+            },
+          },
+        },
+      },
       select: {
         id: true,
         url: true,
         userImage: {
+          where: {
+            user: {
+              deletedAt: null,
+            },
+          },
           select: {
             instagramId: true,
           },
@@ -53,7 +67,14 @@ export class ImageRepository {
       where: {
         userImage: {
           some: {
-            instagramId,
+            AND: [
+              { instagramId },
+              {
+                user: {
+                  deletedAt: null,
+                },
+              },
+            ],
           },
         },
       },
@@ -61,6 +82,11 @@ export class ImageRepository {
         id: true,
         url: true,
         userImage: {
+          where: {
+            user: {
+              deletedAt: null,
+            },
+          },
           select: {
             instagramId: true,
           },
@@ -69,9 +95,26 @@ export class ImageRepository {
       },
     });
   }
-  async getImageById(imageId: number): Promise<ImageData> {
+  async getImageById(imageId: number): Promise<ImageData | null> {
     return this.prisma.image.findUnique({
-      where: { id: imageId },
+      where: {
+        id: imageId,
+      },
+      select: {
+        id: true,
+        url: true,
+        userImage: {
+          select: {
+            instagramId: true,
+            user: {
+              select: {
+                deletedAt: true,
+              },
+            },
+          },
+        },
+        createdAt: true,
+      },
     });
   }
 }

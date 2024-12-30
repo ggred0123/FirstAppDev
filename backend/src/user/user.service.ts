@@ -58,4 +58,8 @@ export class UserService {
 
     return UserListDto.from(users);
   }
+
+  async deleteUser(id: number): Promise<void> {
+    return this.userRepository.deleteUser(id);
+  }
 }

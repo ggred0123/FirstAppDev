@@ -13,6 +13,7 @@ export class UserRepository {
     return this.prisma.user.findFirst({
       where: {
         id: userId,
+        deletedAt: null,
       },
     });
   }
@@ -28,6 +29,9 @@ export class UserRepository {
   }
   async getAllUsers(): Promise<UserData[]> {
     const users = this.prisma.user.findMany({
+      where: {
+        deletedAt: null,
+      },
       select: {
         id: true,
         userName: true,
@@ -65,6 +69,7 @@ export class UserRepository {
     return this.prisma.user.update({
       where: {
         id: id,
+        deletedAt: null,
       },
       data: {
         userName: data.userName,
@@ -88,6 +93,7 @@ export class UserRepository {
     return this.prisma.user.findMany({
       where: {
         userName: userName,
+        deletedAt: null,
       },
       select: {
         id: true,
@@ -97,6 +103,15 @@ export class UserRepository {
         phoneNumber: true,
         instagramId: true,
         createdAt: true,
+      },
+    });
+  }
+
+  async deleteUser(id: number): Promise<void> {
+    await this.prisma.user.update({
+      where: { id: id },
+      data: {
+        deletedAt: new Date(),
       },
     });
   }

@@ -9,4 +9,5 @@ export declare class UserController {
     createUser(payload: CreateUserPayload): Promise<UserDto>;
     updateUser(id: number, payload: PatchUpdateUserPayload): Promise<UserDto>;
     getUserByUserName(userName: string): Promise<UserListDto>;
+    deleteUser(id: number): Promise<void>;
 }

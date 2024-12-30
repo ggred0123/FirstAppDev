@@ -58,4 +58,11 @@ export class UserController {
   ): Promise<UserListDto> {
     return this.userService.getUserByUserName(userName);
   }
+
+  @Delete(":id")
+  @ApiOperation({ summary: "유저 삭제" })
+  @ApiNoContentResponse()
+  async deleteUser(@Param("id", ParseIntPipe) id: number): Promise<void> {
+    return this.userService.deleteUser(id);
+  }
 }

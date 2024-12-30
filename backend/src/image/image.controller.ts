@@ -37,15 +37,16 @@ export class ImageController {
   async getImages(): Promise<ImageListDto> {
     return this.imageService.getImages();
   }
-  @Get(":instagramId")
+  @Get("instagram/:instagramId")
   @ApiOperation({ summary: "유저별 이미지 리스트" })
   @ApiOkResponse({ type: ImageListDto })
   async getImagesByInstagramId(
-    @Body() instagramId: string
+    @Param("instagramId") instagramId: string
   ): Promise<ImageListDto> {
     return this.imageService.getImagesByInstagramId(instagramId);
   }
-  @Get(":imageId")
+
+  @Get("detail/:imageId")
   @ApiOperation({ summary: "이미지 상세" })
   @ApiOkResponse({ type: ImageDto })
   async getImageById(
