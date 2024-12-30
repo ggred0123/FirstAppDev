@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { CreateImagePayload } from "./payload/create-images.payload";
-import { ImageDto } from "./dto/image.dto";
+import { ImageDto, ImageListDto } from "./dto/image.dto";
 import { ImageData } from "./type/image-data.type";
 import { ImageRepository } from "./image.repository";
 import { url } from "inspector";
@@ -23,16 +23,24 @@ export class ImageService {
     return ImageDto.from(image);
   }
 
-  async getImages(): Promise<ImageData[]> {
+  async getImages(): Promise<ImageListDto> {
     const images = await this.imageRepository.getImages();
 
-    return images;
+    return ImageListDto.fromArray(images);
   }
 
-  async getImagesByInstagramId(instagramId: string): Promise<ImageData[]> {
+  async getImagesByInstagramId(instagramId: string): Promise<ImageListDto> {
     const images =
       await this.imageRepository.getImagesByInstagramId(instagramId);
 
-    return images;
+    return ImageListDto.fromArray(images);
+  }
+
+  async getImageById(imageId: number): Promise<ImageDto> {
+    const image = await this.imageRepository.getImageById(imageId);
+    if (!image) {
+      throw new NotFoundException("Image not found");
+    }
+    return ImageDto.from(image);
   }
 }

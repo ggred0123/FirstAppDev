@@ -1,4 +1,11 @@
-import { Body, Controller, Post, Get } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Param,
+  ParseIntPipe,
+} from "@nestjs/common";
 import { ImageDto, ImageListDto } from "./dto/image.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { UploadedFile, UseInterceptors } from "@nestjs/common";
@@ -28,8 +35,7 @@ export class ImageController {
   @ApiOperation({ summary: "이미지 리스트" })
   @ApiOkResponse({ type: ImageListDto })
   async getImages(): Promise<ImageListDto> {
-    const images = await this.imageService.getImages();
-    return ImageListDto.fromArray(images);
+    return this.imageService.getImages();
   }
   @Get(":instagramId")
   @ApiOperation({ summary: "유저별 이미지 리스트" })
@@ -37,7 +43,14 @@ export class ImageController {
   async getImagesByInstagramId(
     @Body() instagramId: string
   ): Promise<ImageListDto> {
-    const images = await this.imageService.getImagesByInstagramId(instagramId);
-    return ImageListDto.fromArray(images);
+    return this.imageService.getImagesByInstagramId(instagramId);
+  }
+  @Get(":imageId")
+  @ApiOperation({ summary: "이미지 상세" })
+  @ApiOkResponse({ type: ImageDto })
+  async getImageById(
+    @Param("imageId", ParseIntPipe) imageId: number
+  ): Promise<ImageDto> {
+    return this.imageService.getImageById(imageId);
   }
 }

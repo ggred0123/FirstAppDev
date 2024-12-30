@@ -69,4 +69,9 @@ export class ImageRepository {
       },
     });
   }
+  async getImageById(imageId: number): Promise<ImageData> {
+    return this.prisma.image.findUnique({
+      where: { id: imageId },
+    });
+  }
 }
