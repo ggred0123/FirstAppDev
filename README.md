@@ -1,22 +1,19 @@
 <div align="center">
-<h1> In연 Application </h1>
+<h1> In연.ZIP Application </h1>
 </div>
 
-### **목표** 
-**SDGs Goal 13 기후 변화 대응**을 위한 AI기반 웹서비스 개발
+### **목적** 
+**당신의 소중한 인연들과의 추억들을 모아줍니다!
 
-### **문제 정의** 
-개인의 일상적인 활동이 환경에 미치는 영향을 인식하고 지속 가능한 습관을 형성하기 어려운 점.
+### **개발 동기** 
 
-### **달성 방법** 
-AI 기반 웹서비스를 통해 사용자의 일과를 분석하여 기후 변화에 긍정적인 영향을 미칠 수 있는 점수를 제공하고, 분석 보고서를 생성함으로써 환경을 고려한 일과 개선을 유도합니다. 게이미피케이션 방식을 도입하여 사용자가 재미있고 지속적으로 기록을 이어갈 수 있는 동기를 부여합니다.
+
 
 ### **주요 기능**
-- `일기 분석` 
-  - LLM 분석에 기반한 피드백과 점수 제공
-
-- `기록 제공`
-  - 매일의 행동 및 기록에 대한  데이터 시각화와 보고서 제공
+- `연락처 등록, 상세보기, 수정, 삭제, 검색` 
+  - 실제 연락처들과 최대한 유사하게 구현
+- `이미지들을 인스타그램 아이디들과 함께 등록`
+  - 
 
 <br>
 
@@ -69,6 +66,20 @@ SharedViewModel을 사용하여 탭 1의 연락처 삭제 기능과 탭 2, 3의 
 
 
 
+
+
+
+
+
+
+## 👪 공동 작업자
+
+
+
+- **Minji Kim**  
+  [![GitHub Badge](https://img.shields.io/badge/GitHub-181717?&logo=GitHub&logoColor=white&style=for-the-badge&link=https://github.com/mjth1s1s)](https://github.com/mjth1s1s)
+- **Youngmin Kim**  
+  [![GitHub Badge](https://img.shields.io/badge/GitHub-181717?&logo=GitHub&logoColor=white&style=for-the-badge&link=https://github.com/zeromin03)](https://github.com/zeromin03)
 
 
 
