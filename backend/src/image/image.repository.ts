@@ -49,11 +49,6 @@ export class ImageRepository {
         id: true,
         url: true,
         userImage: {
-          where: {
-            user: {
-              deletedAt: null,
-            },
-          },
           select: {
             instagramId: true,
           },
@@ -62,19 +57,16 @@ export class ImageRepository {
       },
     });
   }
+
   async getImagesByInstagramId(instagramId: string): Promise<ImageData[]> {
     return this.prisma.image.findMany({
       where: {
         userImage: {
           some: {
-            AND: [
-              { instagramId },
-              {
-                user: {
-                  deletedAt: null,
-                },
-              },
-            ],
+            instagramId,
+            user: {
+              deletedAt: null, // 검색하는 사용자가 삭제되지 않은 경우만 확인
+            },
           },
         },
       },
@@ -82,12 +74,8 @@ export class ImageRepository {
         id: true,
         url: true,
         userImage: {
-          where: {
-            user: {
-              deletedAt: null,
-            },
-          },
           select: {
+            // where와 select 구조 수정
             instagramId: true,
           },
         },
@@ -104,13 +92,13 @@ export class ImageRepository {
         id: true,
         url: true,
         userImage: {
+          where: {
+            user: {
+              deletedAt: null, // 삭제되지 않은 사용자의 이미지만 선택
+            },
+          },
           select: {
             instagramId: true,
-            user: {
-              select: {
-                deletedAt: true,
-              },
-            },
           },
         },
         createdAt: true,

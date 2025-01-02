@@ -26,10 +26,10 @@ async function bootstrap() {
         prefix: "/uploads/",
     });
     const config = new swagger_1.DocumentBuilder()
-        .setTitle("Eventory Server")
-        .setDescription("Eventory API description")
+        .setTitle("Mapcamp App(week1) Server")
+        .setDescription("Mapcamp App(week1) API description")
         .setVersion("1.0")
-        .addTag("Eventory")
+        .addTag("Mapcamp App(week1)")
         .addBearerAuth()
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);

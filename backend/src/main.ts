@@ -34,10 +34,10 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle("Eventory Server")
-    .setDescription("Eventory API description")
+    .setTitle("Mapcamp App(week1) Server")
+    .setDescription("Mapcamp App(week1) API description")
     .setVersion("1.0")
-    .addTag("Eventory")
+    .addTag("Mapcamp App(week1)")
     .addBearerAuth()
     .build();
 

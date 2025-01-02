@@ -111,12 +111,21 @@ let UserRepository = class UserRepository {
         });
     }
     async deleteUser(id) {
-        await this.prisma.user.update({
-            where: { id: id },
-            data: {
-                deletedAt: new Date(),
-            },
-        });
+        await this.prisma.$transaction([
+            this.prisma.userImage.deleteMany({
+                where: {
+                    user: {
+                        id: id,
+                    },
+                },
+            }),
+            this.prisma.user.update({
+                where: { id: id },
+                data: {
+                    deletedAt: new Date(),
+                },
+            }),
+        ]);
     }
 };
 exports.UserRepository = UserRepository;
